@@ -24,3 +24,26 @@ To Do:
 * etc
 
 This is the first version of this script, and is being used with our Home Automation to enforce network lockouts for the kids computers.  
+
+usage: 
+
+router_test.py [options]
+
+Configure the Router.
+
+optional arguments:
+
+  -h, --help                          show this help message and exit
+  
+  -p PASSWORD, --password PASSWORD    Password to login with
+  
+  -r ROUTER, --router ROUTER          Routers IP address, e.g. 192.168.1.222
+  
+  -u USERNAME, --username USERNAME    Username to login with
+  
+  --acl ACL             acl to bind/unbind
+  
+  --add                 add the ACL
+  
+  --delete              remove the ACL
+  
