@@ -41,9 +41,7 @@ optional arguments:
   
   -u USERNAME, --username USERNAME    Username to login with
   
-  --acl ACL             acl to bind/unbind
+  --add [ACL1, ACL2, ...]                 add the ACL
   
-  --add                 add the ACL
-  
-  --delete              remove the ACL
+  --delete [ACL1, ACL2, ...]             remove the ACL
   
