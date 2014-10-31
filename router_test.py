@@ -58,10 +58,13 @@ def main ():
 
     tn = telnetlib.Telnet(HOST)
     tn.read_until( "User:" )
-    tn.write( username + cr)
+    send_telnet ( flush_buffers = False, text_to_send = username + cr, timeout = 1, tnsession = tn)
+#    tn.write( username + cr)
     tn.read_until( "Password" )
-    tn.write( password + cr)
-    tn.write (cr)
+    send_telnet ( flush_buffers = False, text_to_send = password + cr, timeout = 1, tnsession = tn)
+#    tn.write( password + cr)
+    send_telnet ( flush_buffers = True, text_to_send = cr, timeout = 1, tnsession = tn)
+#    tn.write (cr)
     login_results = tn.read_until (">")
     hostname = return_hostname ( login_results )
     hostname_config = hostname+"(config)#"
@@ -69,17 +72,17 @@ def main ():
 
     switch_to_enabled_mode ( tn, hostname )
     print "Logged in and Enabled Mode, ", is_enabled_mode (tn, hostname)
-    tn.write (cr)
-    tn.write ("configure" + cr)
-    tn.write (cr)
-    tn.write ("interface vlan 2" + cr)
-    tn.write (cr)
-    test = tn.read_until ("#")
-    print "switch to interface mode results - "
-    print "----------"
-    for x in test.split(cr):
-        print x
-    print "----------"
+    send_telnet ( flush_buffers = True, text_to_send = cr + "configure" + cr, timeout = 1, tnsession = tn)
+#    tn.write (cr)
+#    tn.write ("configure" + cr)
+    send_telnet ( flush_buffers = True, text_to_send = cr + "interface vlan 2" +cr, timeout = 1, tnsession = tn)
+#    tn.write (cr)
+#    tn.write ("interface vlan 2" + cr)
+#    tn.write (cr)
+#    force_buffer_to_clear ( tn )    
+#    test = tn.read_until ("#")
+#    print "switch to interface mode results - "
+
     if args.add != [] and args.add != None:
         for acl in args.add:
             print "Adding bind for %s" % acl
@@ -111,7 +114,7 @@ def main ():
             print "----------"
 
     if args.show:
-        junk = tn.read_until ("ABCDEFGHIJ#", 1)     # FORCE THE telnet buffer to empty
+        test = tn.read_until ("#")
         tn.write ("show access-list bind" + cr)
         output = tn.read_until (hostname_config_if, 1)
         output = output.split (cr)
