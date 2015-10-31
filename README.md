@@ -15,13 +15,18 @@ python router_test.py -u HAUser -p 12345678 -r 192.168.1.1 --delete --acl deny_1
 
 The script uses the telnetlib library to control the router.
 
+Current the script supports:
+
+* Adding an pre-defined ACL to an active binding
+* Removing an pre-defined ACL from the active bindings
+* showing the ACL Bindings that are currently active
+
+
 To Do:
 
 * Error Checking (Currently there is no error checking)
-* Listing of ACLs
 * Creation of ACLs
 * Creation of Binding policies
-* etc
 
 This is the first version of this script, and is being used with our Home Automation to enforce network lockouts for the kids computers.  
 
@@ -44,4 +49,7 @@ optional arguments:
   --add [ACL1, ACL2, ...]                 add the ACL
   
   --delete [ACL1, ACL2, ...]             remove the ACL
+  
+  --show                                Show the ACL Binds that are in effect
+  
   
